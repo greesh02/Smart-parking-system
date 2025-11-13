@@ -30,6 +30,9 @@ Technologies Used -> ESP32-CAMs, Raspberry Pi, microservices architecture (Sprin
 - Object detection and updation of database
 - Cloud Deployed and completely scalable Website and Cloud Database management.
 
+## Flowchart of system
+![Romain-flowchart](resources/Smart_Parking_SystemV2.png)
+
 ## Technical stack
 - Processing server
   - Raspberry Pi 4B 
@@ -58,8 +61,7 @@ Technologies Used -> ESP32-CAMs, Raspberry Pi, microservices architecture (Sprin
 
 
 
-## Flowchart of system
-![Romain-flowchart](resources/Smart_Parking_SystemV2.png)
+
 
 ## Gallery
 ### ESPCAM module
@@ -74,12 +76,10 @@ Technologies Used -> ESP32-CAMs, Raspberry Pi, microservices architecture (Sprin
 
 ### Website
 
-![website_mob_2](https://user-images.githubusercontent.com/63254914/155846893-39bd9e97-aaf2-4f90-971f-ae4239446b59.png)
-
-![145020947-693ba4a2-7d6b-4620-a0fc-46d5aa149523](https://user-images.githubusercontent.com/63254914/155846844-b46c9ca2-ffcb-4321-aebf-84957cf8c861.png)
-
-![mobile_website1](https://user-images.githubusercontent.com/63254914/145021395-9cbd8341-47b8-42f1-af28-5f8a757e90a2.png)
-![145020963-99ef73c6-62bb-476d-b5e7-9f995055ff43](https://user-images.githubusercontent.com/63254914/155846803-f3462eb9-0093-4eb5-99dd-189adf3f2ddc.png)
-
-
+![website](resources/websiteV2_1.png)
+![website](resources/websiteV2_2.png)
+![website](resources/websiteV2_3.png)
+![website](resources/websiteV2_4.png)
+![website](resources/websiteV2_5.png)
+![website](resources/websiteV2_6.png)
 
