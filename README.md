@@ -1,114 +1,172 @@
-# Smart Parking System
-Vision based Smart Parking system 
-Technologies Used -> ESP32-CAMs, Raspberry Pi, microservices architecture (SpringBoot and Python), kafka,  angular, AWS S3 bucket. 
+# 🚗 Smart Parking System
+
+> Vision-based Smart Parking solution for metropolitan cities using **IoT + AI + Cloud + Microservices + Multimodal LLMs**.
+
+> Website URL ->  https://greesh02.github.io/Smart-parking-system/
+
+<p align="center">
+  <img src="resources/Smart_Parking_SystemV2.png" alt="Smart Parking System Flowchart" width="700"/>
+</p>
+
+---
+
+### 🧠 Overview
+A **vision-based smart parking system** that uses camera modules, Object detection and LLM to detect available parking spaces in real time.  
+It integrates a **multimodal Large Language Model (LLM)** capable of processing both **images and text** to provide **context-aware reasoning and insights** — such as summarizing parking lot scene and generating vacant slot count.
+
+---
+
+### ⚡ Key Highlights
+- 🚘 Real-time vehicle detection using **YOLO**  
+- 🧩 Edge computation on **Raspberry Pi** with image processing  
+- ☁️ **Microservices-based backend** using Spring Boot, Python & Kafka  
+- 🧠 **Multimodal LLM reasoning (vision + text)** integrated via **Spring AI + OpenAI API**  
+- 🔗 Event-driven communication via **Kafka**  
+- 🗄️ **MongoDB + AWS S3** for scalable storage  
+- 🌐 **Angular** web portal displaying real-time parking slot availability  
+
+---
+
+### 📋 Contents
+- [Problem Statement](#problem-statement)
+- [Solution Proposed](#solution-proposed)
+- [Segments Involved](#segments-involved)
+- [Technical Stack](#technical-stack)
+- [Multimodal LLM Integration](#multimodal-llm-integration)
+- [Flowchart of System](#flowchart-of-system)
+- [Gallery](#gallery)
+
+---
+
+## 🧩 Problem Statement
+- Parking is a persistent challenge in urban areas, leading to congestion and fuel waste.  
+- Drivers often struggle to find available parking spaces, increasing traffic and pollution.  
+- Existing systems provide static or inaccurate data that fails to reflect real-time parking availability.  
+- There is a need for a **scalable, intelligent, and automated** parking monitoring system.  
+
+---
+
+## 💡 Solution Proposed
+- **ESP32-CAM modules** are deployed in parking areas to stream real-time images.  
+- A **Raspberry Pi** acts as a decentralized processing node for local image computation.  
+- **YOLO-based object detection** identifies occupied slots.  
+- Processed data flows through **Kafka** to microservices that manage cloud data updates.  
+- A **multimodal LLM** interprets visual and textual data to generate **natural-language summaries and vacant slots info** utilizing the info obtained from the YOLO.  
+- The **Angular web application** displays current slot availability and summaries.  
+
+---
+
+## 🧱 Segments Involved
+- **Computing:** Raspberry Pi for localized image analysis and networking.  
+- **IoT Layer:** ESP32-CAM modules for live data capture.  
+- **Cloud Layer:** Spring Boot and Python microservices for computation and storage.  
+- **AI Layer:** LLM reasoning for intelligent interpretation and reporting.  
+- **Frontend Layer:** Angular dashboard with live updates and visual data.  
+
+---
+
+## ⚙️ Flowchart of System
+<p align="center">
+  <img src="resources/Smart_Parking_SystemV2.png" alt="System Flowchart" width="700"/>
+</p>
+
+---
+
+## 🧰 Technical Stack
+
+### 🖥️ Processing Server
+- Raspberry Pi 4B running Raspbian OS  
+- TCP socket communication  
+- Python (OpenCV, PIL) for local processing  
+
+### 📸 ESP32-CAM Setup
+- Arduino IDE (ESP32 Board)  
+- TCP Protocol for image transfer  
+- Lightweight streaming  
+
+### 🌐 Frontend
+- Angular  
+- Google Maps API integration  
+
+### 🧩 Microservices Architecture
+
+| Service | Description | Tech Stack |
+|----------|--------------|-------------|
+| `camera-service` | YOLO-based image detection and upload | Python, OpenCV, Kafka, AWS S3 |
+| `ai-service` | **Multimodal LLM-based reasoning (vision + text)** for interpreting detection data | Java, Spring Boot, Spring AI (OpenAI API), Kafka |
+| `datafetch-service` | Fetches processed data for the frontend | Java, Spring Boot, MongoDB, AWS S3 |
+| `db-writes-service` | Writes occupancy data to the database | Java, Spring Boot, Kafka, MongoDB |
+
+---
+
+## 🧠 Multimodal LLM Integration
+
+The **AI service** leverages a **multimodal Large Language Model (LLM)** to combine **image-based insights (from YOLO)** with **textual and metadata context** for advanced interpretation and reporting.
+
+### 💬 Capabilities
+- **Visual + Text Fusion:** Combines YOLO outputs (detected vehicle counts, slot counts) with contextual information.  
+- **Natural Language Reporting:** > Example: “Limited space; clear but slightly crowded with no visible hazards.”   
+
+### 🧩 Powered by
+- **Spring AI**  
+- **OpenAI Multimodal API (vision + text)**  
+- Integrated within the `ai-service` microservice  
+
+---
+
+## ☁️ Storage
+- **AWS S3:** For storing camera feed images and processed snapshots.  
+- **MongoDB:** For storing real-time occupancy and metadata.  
+
+---
+
+## 🖼️ Gallery
+
+### 🔹 ESP32-CAM Module
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/63254914/145011057-12974ce8-c2bc-4f2a-84cf-5da65a002274.jpg" width="300"/>
+  <img src="https://user-images.githubusercontent.com/63254914/145011091-269a53a6-e352-4ec6-abb7-d028695f939a.jpg" width="300"/>
+  <img src="https://user-images.githubusercontent.com/63254914/145020788-d5f42cb8-4607-4d28-a4bd-d8d94790621f.jpeg" width="300"/>
+</p>
+
+### 🔹 Object Detection (YOLO)
+<p align="center">
+  <img src="backend-microservices/camera-service/images/processed-images/2025-11-13_14.29.08_bangalore_6.JPG" width="700"/>
+</p>
+
+### 🔹 Website Interface
+<p align="center">
+  <img src="resources/websiteV2_1.png" width="700"/>
+  <img src="resources/websiteV2_2.png" width="700"/>
+  <img src="resources/websiteV2_3.png" width="700"/>
+  <img src="resources/websiteV2_4.png" width="700"/>
+  <img src="resources/websiteV2_5.png" width="700"/>
+  <img src="resources/websiteV2_6.png" width="700"/>
+</p>
+
+---
+
+## 🚀 Future Improvements
+- Integration with mobile app for navigation to nearest available slot.  
+- Heatmap visualization of parking usage trends.  
+- License plate recognition (LPR) for automation and access control.  
+- **Enhanced multimodal LLM prompts for deeper contextual analytics.**  
+
+---
+
+## 👩‍💻 Contributors
+### Version 2 -> complete Revamp of backend and UI (This Repo)
+- [Greeshwar R S](https://github.com/greesh02)
+-- redesigned Backend from scratch
+-- event driven backend incorporating LLM and refined object detection.
+-- moved UI to Angular from ejs with extra functionalities.
+
+  
+### [Version1](https://github.com/aswin-sreekumar/Smart-parking-system)
+- [Kailash Hari](https://github.com/kailashhari)
+- [Satish Kumar L](https://github.com/Satish-Kumar-L)
+- [Greeshwar R S](https://github.com/greesh02)
+- [Aswin Sreekumar](https://github.com/aswin-sreekumar)
 
 
-### Contents
-- [Problem statement](#Problem-statement)
-- [Solution proposed](#Solution-proposed)
-- [Segments involved](#Segments-involved)
-- [Technical stack](#Technical-stack)
-- [Technical explanation](#Technical-explanation)
-- [Flowchart of system](#Flowchart-of-system)
-- [Gallery](#Gallery)
-
-## Problem statement
-- Parking has always been an issue in metropolitan cities.  Let it be a shop or a public place, parking wastes time, fuel and sometimes breaks sweat to get it done.
-- Drivers tend to circle around the place searching for parking spots. This increases traffic congestions, wastes fuel and increases pollution. It escalates to a risky scale during festival times.
-- Unable to find proper parking spots, some vehicles are parked in narrow spaces causing traffic jams.
-
-## Solution proposed
-- The project proposes to install low cost camera modules in multiple parking lots across the city, which streams live image to the corresponding remote server 
-- The remote server processes the data from the camera module and decides on the number of vacant parking spaces available in the parking lot
-- The remote server updates the number of vacant parking slots and number of filled parking slots in a cloud database
-- The number of vacant parking slots and their location is displayed in a web application accessible to general public and free to use.
-- The database is updated continuously , ensuring a pristine user experience
-
-## Segments involved
-- Decentralized server (Raspberry Pi) for image processing, computation and network management.
-- ESP32-CAM hardware setup for wireless image transmission and reception by server.
-- Object detection and updation of database
-- Cloud Deployed and completely scalable Website and Cloud Database management.
-
-## Technical stack
-- Processing server
-  - Raspberry Pi 4B 
-  - Raspbian 32-bit OS
-  - SSH access - PuTTy, FileZilla
-  - Auto run on boot-up
-  - TCP Sockets
-  - PIL Library
-- ESP32-CAM setup
-  - Arduino IDE
-  - ESP32 board 
-  - socket library
-  - TCP Protocol
-- Website
-  - Node.js(Express)
-  - HTML5/CSS3
-  - MongoDB
-  - Google Maps API services
-- Object detection and updation
-  - Python
-  - OpenCV library
-  - pyMongo library
-  - Numpy library
-  - OS module
-
-## Technical explanation
-### The Website
-- The website is a scalable, cloud deployed, responsive web application accessible to general public and free to use.
-- Depending on the functionality desired, the user can either search for parking lots near their current location(Mode 1) or a desired destination(Mode 2).
-- The application uses geolocation technology to find the device location and prints out an interactive map with the 10 closest parking lots and the availability.
-- The user can click on the parking slot in the map which links to google maps for directions to that parking lot from the user location(in Mode 1) or from the destination(in Mode 2)
-- It uses Node Js as the back end environment and Express as the server technology. 
-
-### ESPCAM setup
-- ESP32 CAM is used to take pictures in regular intervals and transmit it to a remote server which is in the same WiFi network.
-- Camera pins are defined , camera settings are configured and is initialised.
-- ESP32 cam connects to LAN.
-- ESP32 cam establishes connection with remote server.
-- A frame is captured from the camera and stored in a camera_fb_t pointer , which holds the pixel data , height , width of the image.
-- Pixel data is transmitted to the server through TCP protocol.
-- Since the size of pixel data exceeds the size limit of single TCP socket, pixel data is broken up into chunks and sent individually.
-- The process repeats for every two seconds approximately.
-
-### The Server
-- Raspberry Pi 4B is used as local server for image reception, processing, slot computation and updation to cloud.
-- PuTTy is used to connect wirelessly to the Pi over SSH and FileZilla was used to transfer the file over SFTP. 
-- The ESP32 image reception and object detection python scripts run on boot-up. This was implemented by modifying the .bashrc script to execute the python scripts on boot-up or when a terminal is launched.
-- The ESP32 script receives pixel data of the image as a chunk of bytes. It is stored in a byte array and is converted into a JPEG image using Pillow library. 
-- The script then stores each image under proper naming convention (ESP_XX_CHN_X_time) and stores in the respective directory
-- The Pi is connected to the same local network as the ESP32 CAMs through WiFi. internet is also enabled to perform updation to the cloud.
-
-### Object detection and computation
-- It processes the Images obtained from parking lots one after the other and identifies the bounding boxes of the objects (cars and bikes) utilizing a pretrained model(MobileNet SSD model) in OpenCV DNN module.
-- Based on Intersection Over Union calculation between the predicted bounding boxes and manually drawn bounding boxes representing parking areas Occupancy of respective parking lots gets updated in the server.
-- After processing, the image gets deleted automatically to avoid reprocessing.
-
-
-## Flowchart of system
-![Romain-flowchart](https://user-images.githubusercontent.com/63254914/145010041-10b53ae5-b5e7-4cda-89e6-7fe81f6e233d.png)
-
-## Gallery
-### ESPCAM module
-![cam_1_cropped](https://user-images.githubusercontent.com/63254914/145011057-12974ce8-c2bc-4f2a-84cf-5da65a002274.jpg)
-![cam2_cropped](https://user-images.githubusercontent.com/63254914/145011091-269a53a6-e352-4ec6-abb7-d028695f939a.jpg)
-![cam3_cropped](https://user-images.githubusercontent.com/63254914/145020788-d5f42cb8-4607-4d28-a4bd-d8d94790621f.jpeg)
-
-### Object detection
-![occ1_crop](https://user-images.githubusercontent.com/63254914/145021342-a76fa8c2-bea5-4c9d-b4ab-78943e9291c7.png)
-![occ3_crop](https://user-images.githubusercontent.com/63254914/145022138-48e320c8-b803-41e9-8c4d-e3bca6af1675.png)
-![occ2_crop](https://user-images.githubusercontent.com/63254914/145021366-a41d5e67-8bc0-436d-9eba-92378afdb756.png)
-
-### Website
-
-![website_mob_2](https://user-images.githubusercontent.com/63254914/155846893-39bd9e97-aaf2-4f90-971f-ae4239446b59.png)
-
-![145020947-693ba4a2-7d6b-4620-a0fc-46d5aa149523](https://user-images.githubusercontent.com/63254914/155846844-b46c9ca2-ffcb-4321-aebf-84957cf8c861.png)
-
-![mobile_website1](https://user-images.githubusercontent.com/63254914/145021395-9cbd8341-47b8-42f1-af28-5f8a757e90a2.png)
-![145020963-99ef73c6-62bb-476d-b5e7-9f995055ff43](https://user-images.githubusercontent.com/63254914/155846803-f3462eb9-0093-4eb5-99dd-189adf3f2ddc.png)
-
-
-
+---
