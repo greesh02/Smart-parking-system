@@ -55,7 +55,7 @@ It integrates a **multimodal Large Language Model (LLM)** capable of processing 
 ---
 
 ## 🧱 Segments Involved
-- **Edge Computing:** Raspberry Pi for localized image analysis and networking.  
+- **Computing:** Raspberry Pi for localized image analysis and networking.  
 - **IoT Layer:** ESP32-CAM modules for live data capture.  
 - **Cloud Layer:** Spring Boot and Python microservices for computation and storage.  
 - **AI Layer:** LLM reasoning for intelligent interpretation and reporting.  
