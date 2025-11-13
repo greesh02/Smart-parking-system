@@ -5,7 +5,7 @@
 > Website URL ->  https://greesh02.github.io/Smart-parking-system/
 
 <p align="center">
-  <img src="resources/Smart_Parking_SystemV2.png" alt="Smart Parking System Flowchart" width="700"/>
+  <img src="resources/Smart_Parking_SystemV2.png" alt="Smart Parking System Flowchart" width="100000" height="50000"/>
 </p>
 
 ---
@@ -67,7 +67,7 @@ It integrates a **multimodal Large Language Model (LLM)** capable of processing 
 
 ## ⚙️ Flowchart of System
 <p align="center">
-  <img src="resources/Smart_Parking_SystemV2.png" alt="System Flowchart" width="700"/>
+  <img src="resources/Smart_Parking_SystemV2.png" alt="Smart Parking System Flowchart" width="100000" height="50000"/>
 </p>
 
 ---
