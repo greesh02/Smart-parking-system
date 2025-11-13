@@ -1,0 +1,7 @@
+{
+     "vehicleTypes": [
+    { "key": "CAR", "value": "car" },
+    { "key": "MOTORBIKE", "value": "motorbike" },
+    { "key": "BUS", "value": "bus" }
+  ]
+}
