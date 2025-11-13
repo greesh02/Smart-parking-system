@@ -1,0 +1,169 @@
+<section class="results">
+  <div class="results-container">
+    <div class="results-header">
+      <div class="header-content">
+        <h2 class="results-title">Parking Results</h2>
+        <p class="results-subtitle">{{ visible().length }} parking {{ visible().length === 1 ? 'spot' : 'spots' }} found</p>
+        <div class="search-info" *ngIf="searchMethod">
+          <div class="search-info-item">
+            <svg class="search-info-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" *ngIf="searchMethod === 'address'">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+            </svg>
+            <svg class="search-info-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" *ngIf="searchMethod === 'current-location'">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 2v2m0 16v2M2 12h2m16 0h2" />
+            </svg>
+            <span class="search-info-text">
+              <span class="search-method-label" *ngIf="searchMethod === 'address'">Searching near:</span>
+              <span class="search-method-label" *ngIf="searchMethod === 'current-location'">Searching near your current location</span>
+              <span class="search-address" *ngIf="searchMethod === 'address' && searchAddress">{{ searchAddress }}</span>
+              <span class="search-vehicle-type"> for {{ formatVehicleType(vehicleType) }} slots</span>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="results-layout">
+
+      <div class="sidebar">
+        <div class="filters-panel card">
+          <h3 class="filters-title">Filters</h3>
+          
+          <div class="filters-row">
+            <div class="filter-group">
+              <label class="filter-label">Sort By</label>
+              <select class="filter-select" [(ngModel)]="sortBy" (change)="applyFilters()">
+                <option value="distance">Distance</option>
+                <option value="duration">Duration</option>
+                <option value="available">Available Slots</option>
+              </select>
+            </div>
+
+            <div class="filter-group">
+              <label class="filter-label">Order</label>
+              <select class="filter-select" [(ngModel)]="sortDir" (change)="applyFilters()">
+                <option value="asc">Ascending</option>
+                <option value="desc">Descending</option>
+              </select>
+            </div>
+
+            <div class="filter-group">
+              <label class="filter-label">Min Free {{ vehicleType }} Slots</label>
+              <input 
+                type="number" 
+                class="filter-input"
+                [(ngModel)]="minFree" 
+                (input)="applyFilters()"
+                min="0"
+                placeholder="0"
+              />
+            </div>
+          </div>
+        </div>
+
+        <div class="cards-container">
+          <div class="cards-header">
+            <span class="cards-count">{{ visible().length }} results</span>
+          </div>
+          
+          <div class="cards">
+            <div
+              *ngFor="let it of visible(); let i = index"
+              class="parking-card card"
+              (click)="select(it)"
+              [class.selected]="selected === it"
+            >
+              <div class="card-badge">{{ i + 1 }}</div>
+              
+              <div class="card-content">
+                <div class="card-header">
+                  <h4 class="card-title">{{ it.parkingLot.lotId }}</h4>
+                  <div class="card-distance">
+                    <svg class="distance-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                    </svg>
+                    <span>{{ formatDistance(it.distanceMatrixResponseItem?.distanceMeters) }}</span>
+                  </div>
+                </div>
+
+                <div class="card-body">
+                  <div class="availability-badge" [style.background-color]="getAvailabilityBadgeColor(it)">
+                    <span class="availability-label">Available</span>
+                    <span class="availability-value">{{ getAvailabilityText(it) }}</span>
+                  </div>
+
+                  <div class="card-info" *ngIf="it.distanceMatrixResponseItem?.duration">
+                    <svg class="info-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    <span>ETA: {{ formatDuration(it.distanceMatrixResponseItem?.duration) }}</span>
+                  </div>
+
+                  <p class="card-description" *ngIf="it.parkingLot.aiDescription">
+                    {{ it.parkingLot.aiDescription }}
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div *ngIf="visible().length === 0" class="empty-state">
+              <svg class="empty-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+              <p>No parking spots found</p>
+              <p class="empty-subtitle">Try adjusting your filters</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="map-container">
+        <div class="map-wrapper">
+          <google-map height="100%" [center]="center" [zoom]="zoom" [options]="mapOptions">
+            <map-marker *ngIf="center" [position]="center" title="Your Location">
+              <map-info-window>
+                <div class="info-window">
+                  <strong>Your Location</strong>
+                </div>
+              </map-info-window>
+            </map-marker>
+
+            <map-marker
+              *ngFor="let p of visible(); index as i"
+              [position]="{ lat: p.parkingLot.position.y, lng: p.parkingLot.position.x }"
+              [title]="p.parkingLot.lotId"
+              [options]="{ icon: getMarkerIcon(i) }"
+              (mapClick)="select(p)">
+              <map-info-window>
+                <div class="info-window">
+                  <strong>{{ p.parkingLot.lotId }}</strong>
+                  <p>{{ getAvailabilityText(p) }} available</p>
+                </div>
+              </map-info-window>
+            </map-marker>
+          </google-map>
+        </div>
+      </div>
+
+     
+
+      
+    </div>
+  </div>
+
+  <!-- Backdrop for parking detail modal -->
+  <div 
+    *ngIf="selected" 
+    class="detail-backdrop"
+    (click)="selected = null">
+  </div>
+
+  <app-parking-detail
+    *ngIf="selected"
+    [item]="selected"
+    (close)="selected = null">
+  </app-parking-detail>
+</section>

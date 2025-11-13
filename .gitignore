@@ -1,1 +1,136 @@
-romain-parking/node_modules/
+################################################################################
+# GLOBAL GITIGNORE FOR MULTI-MODULE PROJECT
+# Includes: Spring Boot microservices + Angular/React/Node.js frontend
+################################################################################
+
+########################
+# OS / SYSTEM FILES
+########################
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+ehthumbs.db
+Icon?
+desktop.ini
+
+########################
+# ENVIRONMENT / SECRETS
+########################
+# Match .env and variants in any subfolder (e.g. /frontend/abc/.env)
+**/.env
+**/.env.*
+**/*.env
+**/config.env
+**/*.pem
+**/*.key
+**/*.crt
+**/*.p12
+
+########################
+# LOGS / RUNTIME FILES
+########################
+**/logs/
+**/*.log
+**/*.out
+**/*.pid
+**/*.pid.lock
+**/npm-debug.log*
+**/yarn-debug.log*
+**/yarn-error.log*
+**/pnpm-debug.log*
+
+########################
+# BUILD / OUTPUT DIRECTORIES
+########################
+# Spring Boot & Java
+**/target/
+**/build/
+**/out/
+**/.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**/target/
+!**/src/test/**/target/
+!**/src/main/**/build/
+!**/src/test/**/build/
+
+# Node.js / Frontend
+**/node_modules/
+**/dist/
+**/.tmp/
+**/.cache/
+
+########################
+# ANGULAR SPECIFIC
+########################
+# Compiled output
+**/dist/
+**/out-tsc/
+**/tmp/
+
+# Angular environment files (should not be committed)
+**/src/environments/environment*.ts
+
+# Angular cache
+**/.angular/
+**/.angular/cache/
+**/.angular/webpack/
+
+# Angular testing
+**/coverage/
+**/test-results/
+**/reports/
+
+########################
+# COVERAGE / TEST OUTPUT
+########################
+**/coverage/
+**/test-results/
+**/reports/
+
+########################
+# IDE & EDITOR FILES
+########################
+# IntelliJ / JetBrains
+**/.idea/
+**/*.iws
+**/*.iml
+**/*.ipr
+
+# VS Code
+**/.vscode/
+**/.history/
+
+# Eclipse / STS
+**/.apt_generated
+**/.classpath
+**/.factorypath
+**/.project
+**/.settings/
+**/.springBeans
+**/.sts4-cache
+
+# NetBeans
+**/nbproject/private/
+**/nbbuild/
+**/dist/
+**/nbdist/
+**/.nb-gradle/
+
+########################
+# MISC
+########################
+**/HELP.md
+**/.gradle/
+**/build.gradle.kts
+**/package-lock.json
+**/yarn.lock
+**/pnpm-lock.yaml
+
+########################
+# BACKUP / TEMP
+########################
+**/*.bak
+**/*.tmp
+**/*.temp
+**/*.old
+**/*.orig

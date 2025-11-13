@@ -1,0 +1,199 @@
+<aside class="detail-panel" *ngIf="item as lot">
+  <div class="detail-content">
+    <!-- Header -->
+    <div class="detail-header">
+      <div class="header-info">
+        <h3 class="detail-title">{{ lot.parkingLot.lotId }}</h3>
+        <p class="detail-subtitle" *ngIf="lot.distanceMatrixResponseItem">
+          {{ formatDistance(lot.distanceMatrixResponseItem.distanceMeters) }} away
+        </p>
+      </div>
+      <button class="close-button" (click)="close.emit()" aria-label="Close">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
+    </div>
+
+    <!-- AI Observation -->
+    <section class="detail-section" *ngIf="lot.parkingLot.aiDescription">
+      <div class="section-header">
+        <svg class="section-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+        </svg>
+        <h4 class="section-title">AI Observation</h4>
+      </div>
+      <div class="ai-content">
+        <p>{{ lot.parkingLot.aiDescription }}</p>
+      </div>
+    </section>
+
+    <!-- Images -->
+    <section class="detail-section" *ngIf="images.length > 0; else loadingBlock">
+      <div class="section-header">
+        <svg class="section-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+        </svg>
+        <h4 class="section-title">Images</h4>
+      </div>
+      <div class="images-grid">
+        <div class="image-wrapper" *ngFor="let img of images; let i = index">
+          <div class="image-label">{{ i === 0 ? 'Original' : 'Processed' }}</div>
+          <div class="image-container" (click)="openPreview(img)">
+            <img
+              [src]="img"
+              [alt]="lot.parkingLot.lotId + ' ' + (i === 0 ? 'original' : 'processed')"
+              (load)="onImageLoad(i)"
+              class="detail-image"
+            />
+            <div class="image-overlay">
+              <svg class="zoom-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 11v6m4-3H7" />
+              </svg>
+            </div>
+            <div class="loading-overlay" *ngIf="loadingStates[i]">
+              <svg class="spinner" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4" opacity="0.25"></circle>
+                <path fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" opacity="0.75"></path>
+              </svg>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <ng-template #loadingBlock>
+      <div class="loading-state">
+        <svg class="loading-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+        </svg>
+        <p>Loading images...</p>
+      </div>
+    </ng-template>
+
+    <!-- Location Details -->
+    <section class="detail-section">
+      <div class="section-header">
+        <svg class="section-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+        </svg>
+        <h4 class="section-title">Location</h4>
+      </div>
+      <div class="info-grid">
+        <div class="info-item" *ngIf="lot.parkingLot.streetAddress">
+          <span class="info-label">Street</span>
+          <span class="info-value">{{ lot.parkingLot.streetAddress }}</span>
+        </div>
+        <div class="info-item" *ngIf="lot.parkingLot.landmark">
+          <span class="info-label">Landmark</span>
+          <span class="info-value">{{ lot.parkingLot.landmark }}</span>
+        </div>
+        <div class="info-item" *ngIf="lot.parkingLot.city">
+          <span class="info-label">City</span>
+          <span class="info-value">{{ lot.parkingLot.city }}</span>
+        </div>
+        <div class="info-item" *ngIf="lot.parkingLot.state">
+          <span class="info-label">State</span>
+          <span class="info-value">{{ lot.parkingLot.state }}</span>
+        </div>
+        <div class="info-item" *ngIf="lot.parkingLot.postalCode">
+          <span class="info-label">Postal Code</span>
+          <span class="info-value">{{ lot.parkingLot.postalCode }}</span>
+        </div>
+        <div class="info-item" *ngIf="lot.parkingLot.country">
+          <span class="info-label">Country</span>
+          <span class="info-value">{{ lot.parkingLot.country }}</span>
+        </div>
+        <div class="info-item">
+          <span class="info-label">Coordinates</span>
+          <span class="info-value">{{ lot.parkingLot.position.y | number:'1.6-6' }}, {{ lot.parkingLot.position.x | number:'1.6-6' }}</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Slot Information -->
+    <section class="detail-section">
+      <div class="section-header">
+        <svg class="section-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+        </svg>
+        <h4 class="section-title">Parking Slots</h4>
+      </div>
+      <div class="slots-grid">
+        <div class="slot-card">
+          <div class="slot-header">
+            <span class="slot-type">Car</span>
+            <span class="slot-badge badge-success">{{ lot.parkingLot.slotInfo?.availableSlotsCount?.car ?? 0 }} available</span>
+          </div>
+          <div class="slot-details">
+            <span class="slot-detail">Occupied: {{ lot.parkingLot.slotInfo?.occupiedSlotsCount?.car ?? 0 }}</span>
+            <span class="slot-detail">Total: {{ (lot.parkingLot.slotInfo?.availableSlotsCount?.car ?? 0) + (lot.parkingLot.slotInfo?.occupiedSlotsCount?.car ?? 0) }}</span>
+          </div>
+        </div>
+        <div class="slot-card">
+          <div class="slot-header">
+            <span class="slot-type">Motorbike</span>
+            <span class="slot-badge badge-success">{{ lot.parkingLot.slotInfo?.availableSlotsCount?.motorbike ?? 0 }} available</span>
+          </div>
+          <div class="slot-details">
+            <span class="slot-detail">Occupied: {{ lot.parkingLot.slotInfo?.occupiedSlotsCount?.motorbike ?? 0 }}</span>
+            <span class="slot-detail">Total: {{ (lot.parkingLot.slotInfo?.availableSlotsCount?.motorbike ?? 0) + (lot.parkingLot.slotInfo?.occupiedSlotsCount?.motorbike ?? 0) }}</span>
+          </div>
+        </div>
+        <div class="slot-card">
+          <div class="slot-header">
+            <span class="slot-type">Bus</span>
+            <span class="slot-badge badge-success">{{ lot.parkingLot.slotInfo?.availableSlotsCount?.bus ?? 0 }} available</span>
+          </div>
+          <div class="slot-details">
+            <span class="slot-detail">Occupied: {{ lot.parkingLot.slotInfo?.occupiedSlotsCount?.bus ?? 0 }}</span>
+            <span class="slot-detail">Total: {{ (lot.parkingLot.slotInfo?.availableSlotsCount?.bus ?? 0) + (lot.parkingLot.slotInfo?.occupiedSlotsCount?.bus ?? 0) }}</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Last Updated -->
+    <section class="detail-section" *ngIf="lot.parkingLot.lastUpdated">
+      <div class="section-header">
+        <svg class="section-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+        <h4 class="section-title">Last Updated</h4>
+      </div>
+      <div class="update-info">
+        <div class="update-item" *ngIf="lot.parkingLot.lastUpdated.cameraService">
+          <span class="update-label">Camera Service</span>
+          <span class="update-value">{{ lot.parkingLot.lastUpdated.cameraService }}</span>
+        </div>
+        <div class="update-item" *ngIf="lot.parkingLot.lastUpdated.aiService">
+          <span class="update-label">AI Service</span>
+          <span class="update-value">{{ lot.parkingLot.lastUpdated.aiService }}</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Action Button -->
+    <div class="detail-actions">
+      <button class="btn btn-primary action-button" (click)="openMaps()">
+        <svg class="action-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />
+        </svg>
+        <span>Navigate with Google Maps</span>
+      </button>
+    </div>
+  </div>
+</aside>
+
+<!-- Image Preview Modal -->
+<div class="preview-backdrop" *ngIf="previewImage" (click)="closePreview()">
+  <div class="preview-container" (click)="$event.stopPropagation()">
+    <img class="preview-image" [src]="previewImage" alt="Preview" />
+    <button class="preview-close" (click)="closePreview()" aria-label="Close preview">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+      </svg>
+    </button>
+  </div>
+</div>

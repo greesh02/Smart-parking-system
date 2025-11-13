@@ -1,0 +1,6 @@
+boto3
+kafka-python
+opencv-python
+python-dotenv
+pytest
+pytest-mock

@@ -1,0 +1,7 @@
+{
+  "apiBase": "http://localhost:8080",
+  "endpoints": {
+    "parkingLot": "/api/v1/parkingLot",
+    "parkingImages": "/api/v1/parkingLot/image"
+  }
+}

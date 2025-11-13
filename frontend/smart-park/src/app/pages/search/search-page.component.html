@@ -1,0 +1,117 @@
+<section class="hero">
+  <div class="hero-container">
+    <div class="hero-content animate-fade-in-up">
+      <div class="hero-header">
+        <h1 class="hero-title">
+          Find Smarter Parking
+          <span class="gradient-text">Instantly</span>
+        </h1>
+        <p class="hero-subtitle">
+          Skip the circling. Discover available parking near you in seconds — 
+          powered by AI and real-time updates.
+        </p>
+      </div>
+
+      <div class="search-card card-elevated">
+        <div class="search-main">
+          <div class="search-input-wrapper">
+            <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+            </svg>
+            <input
+              [(ngModel)]="address"
+              class="search-input"
+              type="text"
+              placeholder="Enter address or landmark..."
+              [disabled]="busy"
+            />
+          </div>
+          <button 
+            class="btn btn-primary search-button" 
+            (click)="findByAddress()" 
+            [disabled]="busy || !address.trim()"
+          >
+            <span *ngIf="!busy">Find Parking</span>
+            <span *ngIf="busy">Searching...</span>
+            <svg *ngIf="busy" class="spinner" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+              <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4" opacity="0.25"></circle>
+              <path fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" opacity="0.75"></path>
+            </svg>
+          </button>
+        </div>
+
+        <div class="divider">
+          <span>OR</span>
+        </div>
+
+        <div class="filters">
+          <div class="filter-row">
+            <div class="filter-item">
+              <label class="filter-label">Search Radius</label>
+              <div class="input-group">
+                <input
+                  type="number"
+                  [(ngModel)]="radius"
+                  min="1"
+                  max="50"
+                  class="filter-input"
+                  [disabled]="busy"
+                />
+                <span class="input-suffix">km</span>
+              </div>
+            </div>
+
+            <div class="filter-item">
+              <label class="filter-label">Vehicle Type</label>
+              <select 
+                [(ngModel)]="vehicleType" 
+                class="filter-select"
+                [disabled]="busy"
+              >
+                <option *ngFor="let type of vehicleTypes" [value]="type.key">
+                  {{ type.value }}
+                </option>
+              </select>
+            </div>
+          </div>
+
+          <button
+            class="btn btn-secondary near-me-button"
+            (click)="findNearMe()"
+            [disabled]="busy"
+          >
+            <svg class="icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+            </svg>
+            <span>Find Near Me</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="features">
+        <div class="feature-item">
+          <div class="feature-icon">🤖</div>
+          <div class="feature-text">
+            <strong>AI-Powered</strong>
+            <span>Smart insights</span>
+          </div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-icon">⚡</div>
+          <div class="feature-text">
+            <strong>Real-Time</strong>
+            <span>Live updates</span>
+          </div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-icon">📍</div>
+          <div class="feature-text">
+            <strong>Accurate</strong>
+            <span>Precise locations</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
