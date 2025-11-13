@@ -9,19 +9,19 @@
 ---
 
 ### 🧠 Overview
-A **vision-based smart parking system** that detects available parking spots in real time using camera modules and updates availability on a cloud-hosted web portal.  
-The system integrates **multimodal Large Language Models (LLMs)** — capable of understanding both **images and text** — to provide **intelligent anomaly detection and reporting** within the smart parking network.
+A **vision-based smart parking system** that uses camera modules and edge processing to detect available parking spaces in real time.  
+It integrates a **multimodal Large Language Model (LLM)** capable of processing both **images and text** to provide **context-aware reasoning and insights** — such as summarizing parking trends, identifying usage patterns, and interpreting occupancy data intelligently.
 
 ---
 
 ### ⚡ Key Highlights
-- 🚘 Real-time parking detection using **YOLO (Object Detection)**  
-- 🧩 **Decentralized edge processing** on Raspberry Pi and ESP32-CAM  
-- ☁️ **Microservices architecture** using Spring Boot, Python & Kafka  
-- 🧠 **Multimodal LLM-powered anomaly reporting** (vision + text) using **Spring AI + OpenAI API**  
-- 🔗 **Event-driven pipeline** with Kafka for reliable communication  
-- 🗄️ **MongoDB & AWS S3** for scalable cloud storage  
-- 🌐 **Angular-based web portal** with live map integration  
+- 🚘 Real-time vehicle detection using **YOLO**  
+- 🧩 Edge computation on **Raspberry Pi** with image processing  
+- ☁️ **Microservices-based backend** using Spring Boot, Python & Kafka  
+- 🧠 **Multimodal LLM reasoning (vision + text)** integrated via **Spring AI + OpenAI API**  
+- 🔗 Event-driven communication via **Kafka**  
+- 🗄️ **MongoDB + AWS S3** for scalable storage  
+- 🌐 **Angular** web portal displaying real-time parking slot availability  
 
 ---
 
@@ -37,27 +37,29 @@ The system integrates **multimodal Large Language Models (LLMs)** — capable of
 ---
 
 ## 🧩 Problem Statement
-- Parking congestion remains a major issue in metropolitan areas, leading to wasted time, fuel, and frustration.  
-- Vehicles circling in search of vacant spots increase **traffic congestion** and **pollution**.  
-- Manual monitoring and static systems fail to adapt dynamically.  
-- Lack of intelligent anomaly detection (e.g., faulty cameras, misidentified vehicles) limits system reliability.  
+- Parking is a persistent challenge in urban areas, leading to congestion and fuel waste.  
+- Drivers often struggle to find available parking spaces, increasing traffic and pollution.  
+- Existing systems provide static or inaccurate data that fails to reflect real-time parking availability.  
+- There is a need for a **scalable, intelligent, and automated** parking monitoring system.  
 
 ---
 
 ## 💡 Solution Proposed
-- **ESP32-CAM modules** capture real-time parking images.  
-- **Raspberry Pi servers** run YOLO-based vehicle detection locally.  
-- Processed data is sent to a **cloud-hosted microservice ecosystem** via Kafka.  
-- A **multimodal LLM (vision + text)** evaluates visual + contextual inputs for **anomaly detection** — identifying issues such as misclassified slots, obstructed cameras, or inconsistent data trends.  
-- The **Angular web portal** shows real-time parking availability and system health to users.  
+- **ESP32-CAM modules** are deployed in parking areas to stream real-time images.  
+- A **Raspberry Pi** acts as a decentralized processing node for local image computation.  
+- **YOLO-based object detection** identifies occupied slots.  
+- Processed data flows through **Kafka** to microservices that manage cloud data updates.  
+- A **multimodal LLM** interprets visual and textual data to generate **natural-language summaries and vacant slots info** utilizing the info obtained from the YOLO.  
+- The **Angular web application** displays current slot availability and summaries.  
 
 ---
 
 ## 🧱 Segments Involved
-- **Edge Computing:** Raspberry Pi devices for on-site processing and transmission.  
-- **IoT Layer:** ESP32-CAM modules for live video/image capture.  
-- **Cloud & AI Layer:** Python + Spring Boot microservices with LLM reasoning.  
-- **Frontend Layer:** Angular-based dashboard with Google Maps visualization.  
+- **Edge Computing:** Raspberry Pi for localized image analysis and networking.  
+- **IoT Layer:** ESP32-CAM modules for live data capture.  
+- **Cloud Layer:** Spring Boot and Python microservices for computation and storage.  
+- **AI Layer:** LLM reasoning for intelligent interpretation and reporting.  
+- **Frontend Layer:** Angular dashboard with live updates and visual data.  
 
 ---
 
@@ -71,56 +73,51 @@ The system integrates **multimodal Large Language Models (LLMs)** — capable of
 ## 🧰 Technical Stack
 
 ### 🖥️ Processing Server
-- Raspberry Pi 4B (Raspbian 32-bit)
-- TCP Socket-based image streaming  
-- Python (OpenCV, PIL)  
-- Auto-run service on boot  
+- Raspberry Pi 4B running Raspbian OS  
+- TCP socket communication  
+- Python (OpenCV, PIL) for local processing  
 
 ### 📸 ESP32-CAM Setup
-- Arduino IDE with ESP32 board  
-- TCP Protocol  
-- Wi-Fi-based image transfer  
+- Arduino IDE (ESP32 Board)  
+- TCP Protocol for image transfer  
+- Lightweight streaming  
 
 ### 🌐 Frontend
-- Angular Framework  
-- Google Maps API  
-- Live occupancy visualization  
+- Angular  
+- Google Maps API integration  
 
 ### 🧩 Microservices Architecture
 
 | Service | Description | Tech Stack |
 |----------|--------------|-------------|
-| `camera-service` | YOLO-based vehicle detection and image upload | Python, OpenCV, Kafka, AWS S3 |
-| `ai-service` | **Multimodal LLM-powered anomaly detection (vision + text)** | Java, Spring Boot, Spring AI (OpenAI API), Kafka, AWS S3 |
-| `datafetch-service` | Fetches real-time data for the frontend | Java, Spring Boot, MongoDB |
-| `db-writes-service` | Writes occupancy and anomaly data to DB | Java, Spring Boot, Kafka, MongoDB |
+| `camera-service` | YOLO-based image detection and upload | Python, OpenCV, Kafka, AWS S3 |
+| `ai-service` | **Multimodal LLM-based reasoning (vision + text)** for interpreting detection data | Java, Spring Boot, Spring AI (OpenAI API), Kafka |
+| `datafetch-service` | Fetches processed data for the frontend | Java, Spring Boot, MongoDB, AWS S3 |
+| `db-writes-service` | Writes occupancy data to the database | Java, Spring Boot, Kafka, MongoDB |
 
 ---
 
-## 🤖 Multimodal LLM Integration
-### 🔍 What it does
-The **AI service** uses a **multimodal Large Language Model (LLM)** capable of processing **both image data and text metadata**.  
-This enables **contextual anomaly detection** beyond what traditional object detection models can achieve.
+## 🧠 Multimodal LLM Integration
 
-### 🧩 Core Capabilities
-- **Visual + Text Reasoning:** Combines YOLO’s image detections with metadata for intelligent system analysis.  
-- **Anomaly Reporting:** Detects unusual situations like:
-  - Camera misalignment or obstruction  
-  - False positives / missed detections  
-  - Data drift or inconsistent updates  
-- **Human-like Insight Generation:** Generates descriptive text reports (e.g., *“Camera 3 feed likely obstructed — object detection confidence dropped by 45%”*)  
-- **Kafka Event Triggers:** Sends anomaly summaries as structured Kafka messages for further analysis.  
+The **AI service** leverages a **multimodal Large Language Model (LLM)** to combine **image-based insights (from YOLO)** with **textual and metadata context** for advanced interpretation and reporting.
 
-### 🧠 Powered by
+### 💬 Capabilities
+- **Visual + Text Fusion:** Combines YOLO outputs (detected cars, slot counts) with contextual information.  
+- **Natural Language Reporting:** Converts technical metrics into easy-to-understand summaries.  
+  > Example: “The south lot is 90% full, with 3 available spaces near the main entrance.”  
+- **Trend Interpretation:** Generates time-based summaries or insights for dashboards.  
+- **Adaptive Context Understanding:** Responds intelligently to text-based prompts or queries from the admin portal.
+
+### 🧩 Powered by
 - **Spring AI**  
-- **OpenAI Multimodal API**  
-- Integrated into the `ai-service` microservice  
+- **OpenAI Multimodal API (vision + text)**  
+- Integrated within the `ai-service` microservice  
 
 ---
 
 ## ☁️ Storage
-- **AWS S3** → Image storage and anomaly snapshot archiving  
-- **MongoDB** → Real-time structured data + anomaly logs  
+- **AWS S3:** For storing camera feed images and processed snapshots.  
+- **MongoDB:** For storing real-time occupancy and metadata.  
 
 ---
 
@@ -151,10 +148,10 @@ This enables **contextual anomaly detection** beyond what traditional object det
 ---
 
 ## 🚀 Future Improvements
-- Integration with mobile app for navigation to nearest parking spot  
-- Real-time heatmap of parking demand  
-- License plate recognition (LPR) integration  
-- **Extended multimodal LLMs for predictive analytics and maintenance scheduling**  
+- Integration with mobile app for navigation to nearest available slot.  
+- Heatmap visualization of parking usage trends.  
+- License plate recognition (LPR) for automation and access control.  
+- **Enhanced multimodal LLM prompts for deeper contextual analytics.**  
 
 ---
 
