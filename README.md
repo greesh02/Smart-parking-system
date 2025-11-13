@@ -102,11 +102,8 @@ It integrates a **multimodal Large Language Model (LLM)** capable of processing 
 The **AI service** leverages a **multimodal Large Language Model (LLM)** to combine **image-based insights (from YOLO)** with **textual and metadata context** for advanced interpretation and reporting.
 
 ### 💬 Capabilities
-- **Visual + Text Fusion:** Combines YOLO outputs (detected cars, slot counts) with contextual information.  
-- **Natural Language Reporting:** Converts technical metrics into easy-to-understand summaries.  
-  > Example: “The south lot is 90% full, with 3 available spaces near the main entrance.”  
-- **Trend Interpretation:** Generates time-based summaries or insights for dashboards.  
-- **Adaptive Context Understanding:** Responds intelligently to text-based prompts or queries from the admin portal.
+- **Visual + Text Fusion:** Combines YOLO outputs (detected vehicle counts, slot counts) with contextual information.  
+- **Natural Language Reporting:** > Example: “Limited space; clear but slightly crowded with no visible hazards.”   
 
 ### 🧩 Powered by
 - **Spring AI**  
