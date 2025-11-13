@@ -93,9 +93,9 @@ It integrates a **multimodal Large Language Model (LLM)** capable of processing 
 | Service | Description | Tech Stack |
 |----------|--------------|-------------|
 | `camera-service` | YOLO-based image detection and upload | Python, OpenCV, Kafka, AWS S3 |
-| `ai-service` | **Multimodal LLM-based reasoning (vision + text)** for interpreting detection data | Java, Spring Boot, Spring AI (OpenAI API), Kafka |
-| `datafetch-service` | Fetches processed data for the frontend | Java, Spring Boot, MongoDB, AWS S3 |
-| `db-writes-service` | Writes occupancy data to the database | Java, Spring Boot, Kafka, MongoDB |
+| `ai-service` | **Multimodal LLM-based reasoning (vision + text)** for interpreting detection data | Java, Spring Boot, Spring AI (OpenAI API), Kafka, log4j |
+| `datafetch-service` | Fetches processed data for the frontend | Java, Spring Boot, MongoDB, AWS S3, log4j |
+| `db-writes-service` | Writes occupancy data to the database | Java, Spring Boot, Kafka, MongoDB, Spring batch, log4j |
 
 ---
 
