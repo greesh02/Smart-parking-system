@@ -21,7 +21,7 @@ export class ConfigService {
   async loadApiConfig(): Promise<ApiConfig> {
     if (this.apiCfg) return this.apiCfg;
     this.apiCfg = await this.http
-      .get<ApiConfig>('/assets/api-config.json')
+      .get<ApiConfig>('./assets/api-config.json')
       .toPromise();
     return this.apiCfg!;
   }
@@ -29,7 +29,7 @@ export class ConfigService {
   async loadVehicleTypes(): Promise<VehicleType[]> {
     if (this.vehicleCfg) return this.vehicleCfg;
     const res = await this.http
-      .get<{ vehicleTypes: VehicleType[] }>('/assets/vehicle-types.json')
+      .get<{ vehicleTypes: VehicleType[] }>('./assets/vehicle-types.json')
       .toPromise();
     this.vehicleCfg = res?.vehicleTypes;
     return this.vehicleCfg!;
