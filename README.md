@@ -9,7 +9,7 @@
 ---
 
 ### 🧠 Overview
-A **vision-based smart parking system** that uses camera modules and edge processing to detect available parking spaces in real time.  
+A **vision-based smart parking system** that uses camera modules, Object detection and LLM to detect available parking spaces in real time.  
 It integrates a **multimodal Large Language Model (LLM)** capable of processing both **images and text** to provide **context-aware reasoning and insights** — such as summarizing parking lot scene and generating vacant slot count.
 
 ---
