@@ -70,9 +70,6 @@ Technologies Used -> ESP32-CAMs, Raspberry Pi, microservices architecture (Sprin
 ![cam3_cropped](https://user-images.githubusercontent.com/63254914/145020788-d5f42cb8-4607-4d28-a4bd-d8d94790621f.jpeg)
 
 ### Object detection by yolo
-![objImg](backend-microservices/camera-service/images/processed-images/2025-11-13_14.29.08_bangalore_1.JPG)
-![objImg](backend-microservices/camera-service/images/processed-images/2025-11-13_14.29.08_bangalore_2.JPG)
-![objImg](backend-microservices/camera-service/images/processed-images/2025-11-13_14.29.08_bangalore_5.JPG)
 ![objImg](backend-microservices/camera-service/images/processed-images/2025-11-13_14.29.08_bangalore_6.JPG)
 
 ### Website
