@@ -155,12 +155,13 @@ The **AI service** leverages a **multimodal Large Language Model (LLM)** to comb
 ---
 
 ## 👩‍💻 Contributors
-- [@greesh02](https://github.com/greesh02)
-- [@YourTeamMembersHere]
+### Version 2 -> complete Revamp of backend and UI (eg. event driven backend, moving to Angular from ejs with extra functionalities)
+- [Greeshwar R S](https://github.com/greesh02)
+### [Version1](https://github.com/aswin-sreekumar/Smart-parking-system)
+- [Kailash Hari](https://github.com/kailashhari)
+- [Satish Kumar L](https://github.com/Satish-Kumar-L)
+- [Greeshwar R S](https://github.com/greesh02)
+- [Aswin Sreekumar](https://github.com/aswin-sreekumar)
 
----
-
-## 📄 License
-This project is licensed under the **MIT License** — free to use and modify with attribution.
 
 ---
