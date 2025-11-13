@@ -12,7 +12,7 @@ from objectDetection.camera_recognition_V2 import ObjectRecognition
 from s3_uploader import S3Uploader
 
 logger = setup_logger("main")
-load_dotenv("config.env")
+load_dotenv(".env")
 
 IMAGE_EXTENSIONS = {".jpg", ".jpeg", ".png", ".bmp", ".gif", ".webp"}
 

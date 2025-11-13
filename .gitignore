@@ -67,8 +67,7 @@ desktop.ini
 **/out-tsc/
 **/tmp/
 
-# Angular environment files (should not be committed)
-**/src/environments/environment*.ts
+
 
 # Angular cache
 **/.angular/
