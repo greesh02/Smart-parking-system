@@ -157,9 +157,8 @@ The **AI service** leverages a **multimodal Large Language Model (LLM)** to comb
 ## 👩‍💻 Contributors
 ### Version 2 -> complete Revamp of backend and UI (This Repo)
 - [Greeshwar R S](https://github.com/greesh02)
--- redesigned Backend from scratch
--- event driven backend incorporating LLM and refined object detection.
--- moved UI to Angular from ejs with extra functionalities.
+- redesigned and developed UI(in Angular) and Backend microservices(Springboot, python) from scratch
+- event driven backend incorporating LLM and refined object detection.
 
   
 ### [Version1](https://github.com/aswin-sreekumar/Smart-parking-system)
