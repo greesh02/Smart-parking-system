@@ -14,7 +14,7 @@ public class LlmConfig {
 
     @Bean
     public ChatClient openAiChatClient(OpenAiChatModel chatModel) {
-        
+        log.debug("Creating ChatClient bean backed by OpenAI");
         return ChatClient.create(chatModel);
     }
 }
