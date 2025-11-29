@@ -22,7 +22,7 @@ It integrates a **multimodal Large Language Model (LLM)** capable of processing 
 - ☁️ **Microservices-based backend** using Spring Boot, Python & Kafka  
 - 🧠 **Multimodal LLM reasoning (vision + text)** integrated via **Spring AI + OpenAI API**  
 - 🔗 Event-driven communication via **Kafka**  
-- 🗄️ **MongoDB + AWS S3** for scalable storage  
+- 🗄️ **MongoDB + AWS S3 bucket** for scalable storage  
 - 🌐 **Angular** web portal displaying real-time parking slot availability  
 
 ---
