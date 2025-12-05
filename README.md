@@ -1,4 +1,4 @@
-# 🚗 Smart Parking System
+# 🚗 SlotSense AI
 
 > Vision-based Smart Parking solution for metropolitan cities using **IoT + AI + Cloud + Microservices + Multimodal LLMs**.
 
